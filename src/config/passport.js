@@ -16,7 +16,6 @@ passport.use(new LocalStrategy({
 },async(email,password,done)=>{
     // buscar el usuario en base al email
     const userBDD = await User.findOne({email})
-    verificarVariable(userBDD)
     // Verificar si existe el usuario
     if(!userBDD) return done(showAlert(errorMessage),false,)
     // Desincriptar el passowrd
@@ -28,20 +27,6 @@ passport.use(new LocalStrategy({
     return done(null,userBDD)
 }))
 
-function verificarVariable(variable) {
-  if (typeof variable === "undefined") {
-    console.log("La variable está indefinida");
-  } else if (typeof variable === "object" && variable !== null) {
-    try {
-      JSON.parse(variable);
-      console.log("La variable tiene un valor de JSON");
-    } catch (e) {
-      console.log("La variable no tiene un valor de JSON");
-    }
-  } else {
-    console.log("La variable no es indefinida ni tiene un valor de JSON");
-  }
-}
 
 
 function showAlert(message) {
